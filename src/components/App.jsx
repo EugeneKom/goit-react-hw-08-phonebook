@@ -65,9 +65,9 @@ export const App = () => {
         <Route
           path="*"
           element={
-            <PrivateRoute>
+            <PublicRoute>
               <UserContactsPage />
-            </PrivateRoute>
+            </PublicRoute>
           }
         />
       </Routes>
