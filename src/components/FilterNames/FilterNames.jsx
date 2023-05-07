@@ -1,16 +1,11 @@
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { setFilters } from '../../redux/filterContactsSlice';
+// import { useDispatch } from 'react-redux';
+// import { setFilters } from '../../redux/filterContactsSlice';
+// import { useGetContactsQuery } from 'redux/auth/authSlice';
 
-export const FilterNames = () => {
-  const dispatch = useDispatch();
-
+export const FilterNames = ({ handleFilterValue }) => {
   const newId = nanoid();
-
-  const handleFilterValue = ({ target: { value } }) => {
-    dispatch(setFilters(value));
-  };
 
   return (
     <>
@@ -20,7 +15,7 @@ export const FilterNames = () => {
         id={newId}
         name="filter"
         title="Find contacts by name"
-        onChange={handleFilterValue}
+        onChange={evt => handleFilterValue(evt)}
       ></input>
     </>
   );

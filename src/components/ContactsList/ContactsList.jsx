@@ -1,48 +1,35 @@
-import {
-  selectContacts,
-  selectFilerContact,
-  selectIsLoading,
-} from 'components/utils/selectors';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
 import { ImSpinner } from 'react-icons/im';
-import { deleteContact } from 'redux/contactThunk';
 import { IconContext } from 'react-icons';
+import {
+  useDeleteContactMutation,
+  useGetContactsQuery,
+} from 'redux/auth/authSlice';
+import { DeleteBtn } from './ContactsList.styled';
+import { EditBtn } from 'components/EditBtn/EditBtn';
 
-export const ContactsList = () => {
-  const contacts = useSelector(selectContacts);
-  const isLoading = useSelector(selectIsLoading);
-  const filterName = useSelector(selectFilerContact);
-  const dispatch = useDispatch();
+export const ContactsList = ({ filteredContacts }) => {
+  const { data: contacts, isLoading, isFetching } = useGetContactsQuery();
+  const [deleteContact] = useDeleteContactMutation();
 
   const createMarkup = contacts => {
-    return contacts.map(({ name, id, phone }) => {
+    return contacts.map(({ name, id, number }) => {
       return (
         <li key={id} id={id}>
           <span>{name}:</span>
-          <span>{phone}</span>
-          <button
-            disabled={isLoading}
-            onClick={() => dispatch(deleteContact(id))}
-          >
+          <span>{number}</span>
+          <DeleteBtn disabled={isFetching} onClick={() => deleteContact(id)}>
             Delete
-          </button>
+          </DeleteBtn>
+          <EditBtn id={id} />
         </li>
       );
     });
   };
 
-  const renderFilterMarkup = () => {
-    const newArr = contacts.filter(({ name }) => {
-      const modifiedName = name.toLowerCase();
-      return modifiedName.includes(filterName.toLowerCase());
-    });
-    return newArr;
-  };
-
   return (
     <>
-      {isLoading && (
+      {isFetching && (
         <IconContext.Provider
           value={{
             className: 'spinner',
@@ -51,11 +38,13 @@ export const ContactsList = () => {
           <ImSpinner />
         </IconContext.Provider>
       )}
-      <ul>
-        {filterName === ''
-          ? createMarkup(contacts)
-          : createMarkup(renderFilterMarkup())}
-      </ul>
+      {!isLoading && contacts && (
+        <ul>
+          {filteredContacts
+            ? createMarkup(filteredContacts)
+            : createMarkup(contacts)}
+        </ul>
+      )}
     </>
   );
 };

@@ -1,42 +1,31 @@
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
 import { FormStyle } from './ContactsForm.styled';
-import { addDataContact, fetchContacts } from 'redux/contactThunk';
-import { useEffect } from 'react';
-import { selectContacts } from 'components/utils/selectors';
+import {
+  useCreateNewContactMutation,
+  useGetContactsQuery,
+} from 'redux/auth/authSlice';
+import { toast } from 'react-hot-toast';
+import { checkNameForMath } from 'components/utils/sharedFunctions';
 
 export const ContactsForm = () => {
-  const contacts = useSelector(selectContacts);
-
-  const dispatch = useDispatch();
   const newId = nanoid();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-  const checkNameForMath = name => {
-    let flag = true;
-    contacts.forEach(el => {
-      if (el.name === name) {
-        flag = false;
-        return alert(`${name} is already in contacts`);
-      }
-    });
-    return flag;
-  };
+  const [addContact] = useCreateNewContactMutation();
+  const { data } = useGetContactsQuery();
 
   const onSubmitForm = e => {
     e.preventDefault();
     const form = e.target;
 
-    const contactName = form.elements.name.value;
-    const contactPhone = form.elements.number.value;
+    const name = form.elements.name.value;
+    const number = form.elements.number.value;
 
-    if (checkNameForMath(contactName)) {
-      dispatch(addDataContact({ name: contactName, phone: contactPhone }));
+    if (!checkNameForMath(name, data)) {
+      addContact({ name, number });
+    } else {
+      toast.error(`${name} already exists in your phone book`);
     }
+
     form.reset();
   };
 
