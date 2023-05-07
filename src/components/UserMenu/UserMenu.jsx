@@ -1,6 +1,6 @@
-import { Logout } from 'components/AuthMenu/Logout';
 import { useGetCurrentUserQuery } from 'redux/auth/authSlice';
 import { HiOutlineUserCircle } from 'react-icons/hi';
+import { Logout } from 'components/AuthMenu/Logout';
 import {
   CustomUnderline,
   Tooltip,

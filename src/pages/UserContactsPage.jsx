@@ -1,11 +1,11 @@
+import { useGetContactsQuery } from 'redux/auth/authSlice';
+import { useState } from 'react';
 import { Wrapper } from 'components/App.styled';
 import { ContactsForm } from 'components/ContactsForm/ContactsForm';
 import { ContactsList } from 'components/ContactsList/ContactsList';
 import { ContactsWrapper } from 'components/ContactsList/ContactsList.styled';
 import { FilterNames } from 'components/FilterNames/FilterNames';
 import { UserMenu } from 'components/UserMenu/UserMenu';
-import { useState } from 'react';
-import { useGetContactsQuery } from 'redux/auth/authSlice';
 import { UserTopMenu } from './UserTopMenu.styled';
 
 export const UserContactsPage = () => {

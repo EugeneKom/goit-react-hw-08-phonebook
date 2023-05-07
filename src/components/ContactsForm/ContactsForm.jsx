@@ -1,12 +1,12 @@
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-import { FormStyle } from './ContactsForm.styled';
 import {
   useCreateNewContactMutation,
   useGetContactsQuery,
 } from 'redux/auth/authSlice';
 import { toast } from 'react-hot-toast';
 import { checkNameForMath } from 'components/utils/sharedFunctions';
+import { FormStyle } from './ContactsForm.styled';
 
 export const ContactsForm = () => {
   const newId = nanoid();

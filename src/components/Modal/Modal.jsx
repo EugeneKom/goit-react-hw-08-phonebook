@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Portal } from 'components/Portal/Portal';
 import { StyledModal } from './Modal.styled';
 import { GrFormClose } from 'react-icons/gr';
@@ -17,4 +18,9 @@ export const Modal = ({ children, toggle, open }) => {
       )}
     </Portal>
   );
+};
+
+Modal.propTypes = {
+  toggle: PropTypes.func,
+  open: PropTypes.bool,
 };

@@ -1,13 +1,13 @@
-import { Modal } from 'components/Modal/Modal';
-import { EditBtnStyled, EditForm } from './EditBtn.styled';
 import { FiSettings } from 'react-icons/fi';
 import {
   useGetContactsQuery,
   useModifyContactMutation,
 } from 'redux/auth/authSlice';
-import useToggle from 'hooks/ToggleModal';
-import { checkNameForMath } from 'components/utils/sharedFunctions';
 import { toast } from 'react-hot-toast';
+import { EditBtnStyled, EditForm } from './EditBtn.styled';
+import { checkNameForMath } from 'components/utils/sharedFunctions';
+import { Modal } from 'components/Modal/Modal';
+import useToggle from 'hooks/ToggleModal';
 
 export const EditBtn = ({ id }) => {
   const [modifyContact] = useModifyContactMutation();

@@ -1,5 +1,5 @@
-const { useEffect } = require('react');
-const { createPortal } = require('react-dom');
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 export const Portal = ({ children }) => {
   const modalRoot = document.getElementById('modal-root');
