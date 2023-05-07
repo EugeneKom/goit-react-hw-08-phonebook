@@ -8,7 +8,7 @@ import { FilterNames } from 'components/FilterNames/FilterNames';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { UserTopMenu } from './UserTopMenu.styled';
 
-export const UserContactsPage = () => {
+const UserContactsPage = () => {
   const { data } = useGetContactsQuery();
   const [filteredContacts, setFilteredContacts] = useState(null);
 
@@ -45,3 +45,5 @@ export const UserContactsPage = () => {
     </>
   );
 };
+
+export default UserContactsPage;

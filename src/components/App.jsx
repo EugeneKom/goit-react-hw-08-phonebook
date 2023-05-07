@@ -1,12 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
+import { IconContext } from 'react-icons';
+import { ImSpinner } from 'react-icons/im';
 import { Toaster } from 'react-hot-toast';
 import { AuthMenu } from './AuthMenu/AuthMenu';
 import { LoginMenu } from './AuthMenu/LoginMenu';
-import { UserContactsPage } from '../pages/UserContactsPage';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { PublicRoute } from './PublicRoute/PublicRoute';
 import { Title } from './TItle/Title';
+import { Suspense, lazy } from 'react';
+
+const UserContactsPage = lazy(() => import('../pages/UserContactsPage'));
 
 export const App = () => {
   return (
@@ -41,7 +45,19 @@ export const App = () => {
             path="contacts"
             element={
               <PrivateRoute>
-                <UserContactsPage />
+                <Suspense
+                  fallback={
+                    <IconContext.Provider
+                      value={{
+                        className: 'spinner',
+                      }}
+                    >
+                      <ImSpinner />
+                    </IconContext.Provider>
+                  }
+                >
+                  <UserContactsPage />
+                </Suspense>
               </PrivateRoute>
             }
           />

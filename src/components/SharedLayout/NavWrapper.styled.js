@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const NavWrapper = styled.nav`
   font-family: 'Cedarville Cursive';
+  color: rgb(85, 26, 139);
   display: flex;
   justify-content: center;
   gap: 10px;
