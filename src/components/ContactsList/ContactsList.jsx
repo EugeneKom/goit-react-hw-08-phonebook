@@ -21,7 +21,7 @@ export const ContactsList = ({ filteredContacts }) => {
           <DeleteBtn disabled={isFetching} onClick={() => deleteContact(id)}>
             Delete
           </DeleteBtn>
-          <EditBtn id={id} />
+          <EditBtn id={id} contactName={name} contactNumber={number} />
         </li>
       );
     });

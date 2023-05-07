@@ -29,6 +29,12 @@ export const EditForm = styled.form`
   flex-direction: column;
   align-items: flex-start;
 
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
   input {
     margin-bottom: 14px;
   }
